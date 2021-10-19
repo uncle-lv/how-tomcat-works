@@ -37,6 +37,7 @@ public class Request {
             request.append((char) buffer[j]);
         }
 
+        // Comment out the following line, if you want to print requests
         // log.info("\n{}", request.toString());
         String[] requestLineInfo = parseRequestLine(request.toString());
         method = requestLineInfo[0];
@@ -46,6 +47,7 @@ public class Request {
         log.info("{} - {} - {}", method, uri, protocol);
     }
 
+    // This is the parse method of How Tomcat works, but I don't use it, because it only parse the uri
     private String parseUri(String requestStr) {
         int firstBlank, secondBlank;
 
@@ -59,6 +61,7 @@ public class Request {
         return null;
     }
 
+    // This is the parse method which I defined, it parses the request line
     private String[] parseRequestLine(String requestStr) {
         String requestLine = requestStr.split("\r\n")[0];
         String[] requestLineInfo = requestLine.split(" ");
