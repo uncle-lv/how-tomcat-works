@@ -21,6 +21,7 @@ public class Response {
         this.request = request;
     }
 
+    // I modified this method with Apache Commons IO to make it more easily to read
     public void sendStaticResource() throws IOException {
         FileInputStream fileInputStream = null;
 
