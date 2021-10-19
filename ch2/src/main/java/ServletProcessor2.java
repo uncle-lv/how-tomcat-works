@@ -7,11 +7,12 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.net.URLStreamHandler;
 
-public class ServletProcessor2 {
+public class ServletProcessor2 implements Processor {
 
+    @Override
     public void process(Request request, Response response) {
         String uri = request.getUri();
-        String servletName = uri.substring(uri.lastIndexOf("/" + 1));
+        String servletName = uri.substring(uri.lastIndexOf("/") + 1);
 
         URLClassLoader loader = null;
 
@@ -29,7 +30,7 @@ public class ServletProcessor2 {
 
         Class myClass = null;
         try {
-            myClass = loader.loadClass(servletName);
+            myClass = loader.loadClass(Constants.SERVLET_URL + servletName);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }

@@ -7,7 +7,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 @Slf4j
-public class HttpServer2 {
+public class HttpServer {
 
     private static final String SHUTDOWN_COMMAND = "/SHUTDOWN";
 
@@ -15,12 +15,15 @@ public class HttpServer2 {
 
     private final int PORT;
 
+    private final Processor processor;
+
     public static void main(String[] args) {
-        new HttpServer2(8080).await();
+        new HttpServer(8080, new ServletProcessor1()).await();
     }
 
-    public HttpServer2(int PORT) {
+    public HttpServer(int PORT, Processor processor) {
         this.PORT = PORT;
+        this.processor = processor;
     }
 
     public void await() {
@@ -49,10 +52,7 @@ public class HttpServer2 {
                 Response response = new Response(output);
                 response.setRequest(request);
 
-                if (request.getUri().startsWith("/servlet/")) {
-                    ServletProcessor2 processor = new ServletProcessor2();
-                    processor.process(request, response);
-                }
+                processor.process(request, response);
 
                 socket.close();
 

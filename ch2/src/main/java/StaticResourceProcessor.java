@@ -1,7 +1,8 @@
 import java.io.IOException;
 
-public class StaticResourceProcessor {
+public class StaticResourceProcessor implements Processor {
 
+    @Override
     public void process(Request request, Response response) {
         try {
             response.sendStaticResource();

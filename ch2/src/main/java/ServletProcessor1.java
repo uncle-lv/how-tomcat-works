@@ -10,8 +10,9 @@ import java.net.URLClassLoader;
 import java.net.URLStreamHandler;
 
 @Slf4j
-public class ServletProcessor1 {
+public class ServletProcessor1 implements Processor {
 
+    @Override
     public void process(Request request, Response response) {
         String uri = request.getUri();
         String servletName = uri.substring(uri.lastIndexOf("/") + 1);

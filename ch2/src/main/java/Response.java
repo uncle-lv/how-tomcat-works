@@ -25,8 +25,16 @@ public class Response implements ServletResponse {
         FileInputStream fileInputStream = null;
 
         String uri = request.getUri();
-        if ("/".equals(uri)) {
-            uri = "/index.html";
+
+        switch (uri) {
+            case "/":
+                uri = "/index.html";
+                break;
+            case "/SHUTDOWN":
+                uri = "shutdown.html";
+                break;
+            default:
+                ;
         }
 
         try {
